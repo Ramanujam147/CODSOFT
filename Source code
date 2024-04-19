@@ -1,0 +1,44 @@
+package first.java; 
+
+import java.util.Scanner;
+
+public class GuessingGame {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int maxRange = 100; // Change this to adjust the range
+        int maxTries = 5; // Change this to adjust the number of attempts
+
+        do {
+            int numberToGuess = (int) (Math.random() * maxRange) + 1; // Generate random number
+            int tries = 0;
+            boolean guessedCorrect = false;
+
+            // Start the guessing loop
+            while (tries < maxTries && !guessedCorrect) {
+                System.out.println("Guess a number between 1 and " + maxRange + ": ");
+                int guess = scanner.nextInt();
+                tries++;
+
+                if (guess == numberToGuess) {
+                    guessedCorrect = true;
+                    System.out.println("Congratulations! You guessed the number in " + tries + " tries.");
+                } else if (guess > numberToGuess) {
+                    System.out.println("Your guess is too high. Try again.");
+                } else {
+                    System.out.println("Your guess is too low. Try again.");
+                }
+            }
+
+            // Check if user wants to play again
+            if (!guessedCorrect) {
+                System.out.println("You ran out of tries. The number was " + numberToGuess);
+            }
+            System.out.println("Do you want to play again? (yes/no): ");
+        } while (scanner.nextLine().equalsIgnoreCase("yes"));
+
+        scanner.close();
+        System.out.println("Thanks for playing!");
+    }
+}
+
